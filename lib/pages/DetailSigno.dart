@@ -13,9 +13,44 @@ class DetailSigno extends StatelessWidget {
       appBar: AppBar(
         title: Text("Detalle "+this.signo.nombre),
       ),
-      body: Container(
-      child: Text("Amor: "+this.signo.amor),
-    )
+      body: Column(
+        children:<Widget>[
+           ListTile(
+            title: Center (  child :  Text(this.signo.nombre)),
+            subtitle: Center (child :  Text(this.signo.fechaSigno) ),
+          ),
+          ListTile(
+            title: Text("Amor"),
+            leading:Icon(Icons.local_florist),
+            subtitle: Text(this.signo.amor),
+          ),
+          ListTile(
+            title: Text("Color"),
+            leading:Icon(Icons.format_paint),
+            subtitle: Text(this.signo.color),
+          ),
+          ListTile(
+            title: Text("Dinero"),
+            leading:Icon(Icons.monetization_on),
+            subtitle: Text(this.signo.dinero),
+          ),
+          ListTile(
+            title: Text("Salud"),
+            leading:Icon(Icons.insert_emoticon),
+            subtitle: Text(this.signo.salud),
+          ),
+          ListTile(
+            title: Text("Número"),
+            leading:Icon(Icons.looks_one),
+            subtitle: Text(this.signo.numero),
+          ),
+            
+        
+
+        ],
+        
+
+      )
     );
   }
 }

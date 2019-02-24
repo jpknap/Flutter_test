@@ -2,6 +2,8 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:project_tab/models/Util.dart';
+import 'package:project_tab/pages/LoadingPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_tab/models/Signo.dart';
@@ -25,7 +27,10 @@ class _TabBarApiState extends State<TabBarApi> {
   final parsed = json.decode(responseBody);
   List<Signo> _listaSignos =  new List<Signo>();
    for (final name in parsed.keys) {
+        String iconUrl = Util.zodiac_icons[name];
        final value = parsed[name];
+       value['icon'] = iconUrl;
+
      _listaSignos.add(new Signo.fromJson(value));
   }
 
@@ -61,12 +66,12 @@ class _TabBarApiState extends State<TabBarApi> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+     return MaterialApp(
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("pruebas tab"),
+            title: Text("Tia Yolanda Zultana"),
           ),
           backgroundColor: Colors.lightBlueAccent,
           bottomNavigationBar: TabBar(        
@@ -83,7 +88,7 @@ class _TabBarApiState extends State<TabBarApi> {
           ),
           body: TabBarView(
             children: <Widget>[
-              SignosList(this._storeListSigno),
+              this._storeListSigno.isNotEmpty ? SignosList(this._storeListSigno) :LoadingPage(),
               Text("Tia"),
               Text("Yolanda")
             ],
@@ -94,7 +99,9 @@ class _TabBarApiState extends State<TabBarApi> {
       )
       
     );
+    }
+
   }
 
-}
+
 
